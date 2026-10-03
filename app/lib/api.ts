@@ -1,5 +1,5 @@
 import axios, { type AxiosError, type InternalAxiosRequestConfig } from "axios";
-import { LoginResponse, RegisterResponse, User } from "@/app/types";
+import { LoginResponse, RegisterResponse, User, DashboardStats } from "@/app/types";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
@@ -62,6 +62,11 @@ export async function logout(): Promise<void> {
 
 export async function getMe(userId: string): Promise<User> {
   const response = await api.get<User>(`/users/${userId}`);
+  return response.data;
+}
+
+export async function getDashboardStats(): Promise<DashboardStats> {
+  const response = await api.get<DashboardStats>("/dashboard");
   return response.data;
 }
 

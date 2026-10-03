@@ -4,3 +4,4 @@ export { Checkbox, type CheckboxProps } from "./Checkbox";
 export { FormField, type FormFieldProps } from "./FormField";
 export { FormLayout, type FormLayoutProps } from "./FormLayout";
 export { PageHeader, type PageHeaderProps } from "./PageHeader";
+export { KPICard, type KPICardProps } from "./KPICard";
