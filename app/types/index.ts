@@ -78,13 +78,49 @@ export interface SolicitationDisplay {
   id: string;
   shortId: string;
   title: string;
+  description: string;
   category: string;
   status: SolicitationStatus;
   author: string;
+  authorInitials: string;
   timeAgo: string;
+  formattedDate: string;
   categoryIcon: string;
   categoryBgColor: string;
   iconColor: string;
   statusDotColor: string;
   statusLabelColor: string;
+}
+
+export interface SolicitacoesParams {
+  limit?: number;
+  offset?: number;
+  orderBy?: "asc" | "desc";
+  category?: string;
+  status?: string;
+  startDate?: string;
+  endDate?: string;
+  search?: string;
+}
+
+export interface SolicitacoesFilters {
+  category: string;
+  status: string;
+  startDate: string;
+  endDate: string;
+  search: string;
+  orderBy: "asc" | "desc";
+}
+
+export interface SolicitacoesResponse {
+  data: Solicitation[];
+  total: number;
+}
+
+export interface DataTableColumn<T> {
+  key: string;
+  title: string;
+  width?: string | number;
+  align?: "left" | "center" | "right";
+  render?: (item: T, index: number) => React.ReactNode;
 }

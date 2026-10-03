@@ -66,6 +66,20 @@ export function formatTimeAgo(dateString: string): string {
   return date.toLocaleDateString("pt-PT", { day: "2-digit", month: "2-digit" });
 }
 
+export function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("pt-PT", { day: "2-digit", month: "2-digit", year: "numeric" });
+}
+
+export function getInitials(name: string): string {
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+}
+
 export function generateShortId(id: string): string {
   const num = parseInt(id.slice(-6), 36) || Math.floor(Math.random() * 10000);
   return `SOL-${num.toString().padStart(4, "0")}`;
@@ -75,15 +89,19 @@ export function transformSolicitation(solicitation: Solicitation): SolicitationD
   const displayStatus = mapBackendStatusToDisplay(solicitation.status);
   const categoryStyle = getCategoryStyle(solicitation.category);
   const statusStyle = getStatusStyle(displayStatus);
+  const authorName = solicitation.user?.name || "Utilizador";
 
   return {
     id: solicitation.id,
     shortId: generateShortId(solicitation.id),
     title: solicitation.title,
+    description: solicitation.description,
     category: solicitation.category,
     status: displayStatus,
-    author: solicitation.user?.name || "Utilizador",
+    author: authorName,
+    authorInitials: getInitials(authorName),
     timeAgo: formatTimeAgo(solicitation.createdAt),
+    formattedDate: formatDate(solicitation.createdAt),
     categoryIcon: categoryStyle.icon.displayName || "Monitor",
     categoryBgColor: categoryStyle.bgColor,
     iconColor: categoryStyle.iconColor,

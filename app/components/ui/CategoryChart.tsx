@@ -30,12 +30,12 @@ export function CategoryChart({ categories, className }: CategoryChartProps) {
       )}
     >
       <h3 className="text-[15px] font-bold text-primary">Por categoria</h3>
-      <div className="flex flex-col gap-[16px]">
+      <div className="flex flex-col gap-4">
         {entries.map(([key, value]) => {
           const config = categoryConfig[key] || { label: key, color: "#60a5fa" };
           const percentage = maxValue > 0 ? (value / maxValue) * 100 : 0;
           return (
-            <div key={key} className="flex flex-col gap-[7px]">
+            <div key={key} className="flex flex-col gap-1.75">
               <div className="flex justify-between items-center">
                 <span className="text-[12.5px] font-semibold text-secondary">
                   {config.label}
@@ -44,7 +44,7 @@ export function CategoryChart({ categories, className }: CategoryChartProps) {
                   {value}
                 </span>
               </div>
-              <div className="relative h-[6px] w-full bg-zinc-600 rounded-[3px] overflow-hidden">
+              <div className="relative h-1.5 w-full bg-zinc-600 rounded-[3px] overflow-hidden">
                 {value > 0 && (
                   <div
                     className="h-full rounded-[3px]"

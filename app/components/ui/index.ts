@@ -10,3 +10,8 @@ export { ActivityRow } from "./ActivityRow";
 export { RecentActivity } from "./RecentActivity";
 export { CategoryChart, type CategoryChartProps } from "./CategoryChart";
 export { StatusDonut, type StatusDonutProps } from "./StatusDonut";
+export { CategoryTag } from "./CategoryTag";
+export { Avatar } from "./Avatar";
+export { DataTable, type DataTableProps } from "./DataTable";
+export { Pagination } from "./Pagination";
+export { SolicitacoesFilters } from "./SolicitacoesFilters";

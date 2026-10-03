@@ -66,7 +66,7 @@ export function StatusDonut({ closed, inProgress, open, total, className }: Stat
   const segments = computeSegments(props);
 
   return (
-    <div className={cn("rounded-xl border border-line bg-surface p-[20px_22px] flex flex-col gap-[18px]", className)}>
+    <div className={cn("rounded-xl border border-line bg-surface p-[20px_22px] flex flex-col gap-4.5", className)}>
       <h3 className="text-[15px] font-bold text-primary">Por estado</h3>
 
       <div className="flex flex-col items-center gap-4">
@@ -107,12 +107,12 @@ export function StatusDonut({ closed, inProgress, open, total, className }: Stat
           </svg>
         </div>
 
-        <div className="flex flex-col gap-[10px] w-full max-w-xs">
+        <div className="flex flex-col gap-2.5 w-full max-w-xs">
           {segments.map((seg) => (
             <div key={seg.key} className="flex justify-between items-center">
-              <div className="flex items-center gap-[8px]">
+              <div className="flex items-center gap-2">
                 <span
-                  className="relative h-[8px] w-[8px] rounded-full"
+                  className="relative h-2 w-2 rounded-full"
                   style={{ backgroundColor: seg.color }}
                 />
                 <span className="text-[12.5px] text-white">{seg.label}</span>

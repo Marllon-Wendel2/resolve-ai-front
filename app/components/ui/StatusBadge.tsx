@@ -14,7 +14,7 @@ export function StatusBadge({ status, dotColor, labelColor, className }: StatusB
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-[6px] rounded-full px-3 py-1 shrink-0",
+        "inline-flex items-center gap-1.5 rounded-full px-3 py-1 shrink-0",
         "bg-white/5 border border-white/10",
         className
       )}

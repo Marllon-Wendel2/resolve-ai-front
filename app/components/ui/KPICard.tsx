@@ -28,18 +28,18 @@ export function KPICard({
     <div
       className={cn(
         "rounded-xl border border-line bg-surface p-[18px_20px]",
-        "flex flex-col gap-[14px]"
+        "flex flex-col gap-3.5"
       )}
     >
       <div className="flex justify-between items-center">
-        <p className="text-[10.5px] font-bold tracking-[0.1em] text-white">
+        <p className="text-[10.5px] font-bold tracking-widest text-white">
           {label}
         </p>
         <div
-          className="flex h-[34px] w-[34px] items-center justify-center rounded-[10px] shrink-0"
+          className="flex h-8.5 w-8.5 items-center justify-center rounded-[10px] shrink-0"
           style={{ backgroundColor: iconBgColor }}
         >
-          <Icon className="h-[17px] w-[17px]" style={{ color: iconColor }} />
+          <Icon className="h-4.25 w-4.25" style={{ color: iconColor }} />
         </div>
       </div>
 
@@ -48,7 +48,7 @@ export function KPICard({
       </p>
 
       {(delta || caption) && (
-        <div className="flex items-center gap-[6px]">
+        <div className="flex items-center gap-1.5">
           {delta && (
             <span
               className="text-[11.5px] font-bold"
