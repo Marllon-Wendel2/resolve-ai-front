@@ -2,11 +2,17 @@
 
 import { PageHeader } from "@/app/components/ui";
 import { KPICard } from "@/app/components/ui";
+import { RecentActivity } from "@/app/components/ui";
 import { useDashboard } from "@/app/hooks/useDashboard";
+import { useRecentActivity } from "@/app/hooks/useRecentActivity";
 import { LayoutDashboard, CircleDot, LoaderCircle, CircleCheck } from "lucide-react";
 
 export default function DashboardPage() {
-  const { stats, loading, error } = useDashboard();
+  const { stats, loading: statsLoading, error: statsError } = useDashboard();
+  const { solicitations, loading: activityLoading, error: activityError } = useRecentActivity();
+
+  const loading = statsLoading || activityLoading;
+  const error = statsError || activityError;
 
   if (loading) {
     return (
@@ -28,6 +34,29 @@ export default function DashboardPage() {
               <div className="h-[11.5px] w-10 bg-zinc-700 rounded" />
             </div>
           ))}
+        </div>
+        <div className="rounded-xl border border-line bg-surface overflow-hidden animate-pulse">
+          <div className="px-5.5 py-5 pb-1.5">
+            <div className="flex justify-between items-center">
+              <div className="flex flex-col gap-0.75">
+                <div className="h-3.75 w-32 bg-zinc-700 rounded" />
+                <div className="h-[11.5px] w-48 bg-zinc-700 rounded" />
+              </div>
+              <div className="h-[12.5px] w-20 bg-zinc-700 rounded" />
+            </div>
+          </div>
+          <div className="px-5.5 pb-2 space-y-0">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="flex items-center gap-3.5 pb-3.25 border-b border-zinc-800">
+                <div className="h-8.5 w-8.5 bg-zinc-700 rounded-[10px] shrink-0" />
+                <div className="flex flex-col gap-1 flex-1 min-w-0">
+                  <div className="h-[13.5px] w-[60%] bg-zinc-700 rounded" />
+                  <div className="h-[11.5px] w-[40%] bg-zinc-700 rounded" />
+                </div>
+                <div className="h-5.5 w-20 bg-zinc-700 rounded-full shrink-0" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -58,8 +87,8 @@ export default function DashboardPage() {
       icon: LayoutDashboard,
       iconBgColor: "#3a2410",
       iconColor: "#f0a04b",
-      // delta: "+8%",
-      // caption: "nos últimos 7 dias",
+      delta: "+8%",
+      caption: "nos últimos 7 dias",
     },
     {
       label: "ABERTAS",
@@ -67,9 +96,9 @@ export default function DashboardPage() {
       icon: CircleDot,
       iconBgColor: "#16233a",
       iconColor: "#93c5fd",
+      delta: "-12%",
       deltaColor: "#f87171",
-      // delta: "-12%",
-      // caption: "aguardam atribuição",
+      caption: "aguardam atribuição",
     },
     {
       label: "EM ATENDIMENTO",
@@ -77,8 +106,8 @@ export default function DashboardPage() {
       icon: LoaderCircle,
       iconBgColor: "#2a1c0b",
       iconColor: "#fbbf24",
-      // delta: "+3",
-      // caption: "em curso agora",
+      delta: "+3",
+      caption: "em curso agora",
     },
     {
       label: "CONCLUÍDAS",
@@ -86,8 +115,8 @@ export default function DashboardPage() {
       icon: CircleCheck,
       iconBgColor: "#10241a",
       iconColor: "#4ade80",
-      // delta: "+12%",
-      // caption: "taxa de resolução 57%",
+      delta: "+12%",
+      caption: "taxa de resolução 57%",
     },
   ];
 
@@ -105,6 +134,8 @@ export default function DashboardPage() {
           <KPICard key={i} {...kpi} />
         ))}
       </div>
+
+      <RecentActivity solicitations={solicitations} />
     </div>
   );
 }

@@ -5,3 +5,6 @@ export { FormField, type FormFieldProps } from "./FormField";
 export { FormLayout, type FormLayoutProps } from "./FormLayout";
 export { PageHeader, type PageHeaderProps } from "./PageHeader";
 export { KPICard, type KPICardProps } from "./KPICard";
+export { StatusBadge } from "./StatusBadge";
+export { ActivityRow } from "./ActivityRow";
+export { RecentActivity } from "./RecentActivity";

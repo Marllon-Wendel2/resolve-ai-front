@@ -51,3 +51,39 @@ export interface DashboardStats {
   inProgressSolicitations: number;
   closedSolicitations: number;
 }
+
+// Solicitation types
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface Solicitation {
+  id: string;
+  userId: string;
+  title: string;
+  description: string;
+  category: string;
+  status: "Open" | "InProgress" | "Closed";
+  createdAt: string;
+  updatedAt: string;
+  user: User;
+}
+
+export type SolicitationStatus = "Aberto" | "Em Atendimento" | "Concluído";
+
+export interface SolicitationDisplay {
+  id: string;
+  shortId: string;
+  title: string;
+  category: string;
+  status: SolicitationStatus;
+  author: string;
+  timeAgo: string;
+  categoryIcon: string;
+  categoryBgColor: string;
+  iconColor: string;
+  statusDotColor: string;
+  statusLabelColor: string;
+}
