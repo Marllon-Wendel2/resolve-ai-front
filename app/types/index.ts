@@ -50,6 +50,7 @@ export interface DashboardStats {
   openSolicitations: number;
   inProgressSolicitations: number;
   closedSolicitations: number;
+  categories: Record<string, number>;
 }
 
 // Solicitation types

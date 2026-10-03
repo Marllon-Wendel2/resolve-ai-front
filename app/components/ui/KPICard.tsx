@@ -32,7 +32,7 @@ export function KPICard({
       )}
     >
       <div className="flex justify-between items-center">
-        <p className="text-[10.5px] font-bold tracking-[0.1em] text-secondary">
+        <p className="text-[10.5px] font-bold tracking-[0.1em] text-white">
           {label}
         </p>
         <div
@@ -43,7 +43,7 @@ export function KPICard({
         </div>
       </div>
 
-      <p className="text-[34px] font-bold tracking-[-0.02em] text-primary">
+      <p className="text-[34px] font-bold tracking-[-0.02em] text-white">
         {value}
       </p>
 
