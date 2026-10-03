@@ -2,20 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
+import Sidebar from "./Sidebar";
 
-import Sidebar, { type NavItemId, type SidebarUser } from "./Sidebar";
-
-interface SidebarDrawerProps {
-  user?: SidebarUser;
-  onNavigate?: (item: NavItemId) => void;
-  onLogout?: () => void;
-}
-
-export default function SidebarDrawer({
-  user,
-  onNavigate,
-  onLogout,
-}: SidebarDrawerProps) {
+export default function SidebarDrawer() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,7 +13,6 @@ export default function SidebarDrawer({
     if (!dialog) return;
 
     if (isOpen) {
-
       if (!dialog.open) dialog.showModal();
     } else if (dialog.open) {
       dialog.close();
@@ -54,7 +42,6 @@ export default function SidebarDrawer({
         className="sidebar-drawer"
         onClose={() => setIsOpen(false)}
         onClick={(event) => {
-
           if (event.target === dialogRef.current) close();
         }}
       >
@@ -71,17 +58,7 @@ export default function SidebarDrawer({
           </div>
 
           <div className="min-h-0 flex-1">
-            <Sidebar
-              user={user}
-              onNavigate={(item) => {
-                onNavigate?.(item);
-                close();
-              }}
-              onLogout={() => {
-                onLogout?.();
-                close();
-              }}
-            />
+            <Sidebar />
           </div>
         </div>
       </dialog>
