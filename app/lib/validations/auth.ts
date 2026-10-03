@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { LoginInput, RegisterInput } from "@/app/types";
 
 export const loginSchema = z.object({
   username: z
@@ -9,9 +10,7 @@ export const loginSchema = z.object({
     .string()
     .min(1, "Palavra-passe é obrigatória")
     .min(8, "Palavra-passe deve ter no mínimo 8 caracteres"),
-});
-
-export type LoginInput = z.infer<typeof loginSchema>;
+}) satisfies z.ZodType<LoginInput>;
 
 export const registerSchema = z
   .object({
@@ -43,6 +42,4 @@ export const registerSchema = z
   .refine((data) => data.password === data.confirmPassword, {
     message: "As palavras-passe não coincidem",
     path: ["confirmPassword"],
-  });
-
-export type RegisterInput = z.infer<typeof registerSchema>;
+  }) satisfies z.ZodType<RegisterInput>;

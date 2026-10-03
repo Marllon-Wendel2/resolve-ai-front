@@ -6,7 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { User, KeyRound, Eye, EyeOff, ArrowRight } from "lucide-react";
 import { Checkbox, FormLayout, FormField } from "@/app/components/ui";
-import { loginSchema, type LoginInput } from "@/app/lib/validations/auth";
+import { loginSchema } from "@/app/lib/validations/auth";
+import { LoginInput } from "@/app/types";
 import { login, setAuthToken } from "@/app/lib/api";
 
 export function LoginForm() {

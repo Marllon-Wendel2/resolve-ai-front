@@ -1,24 +1,45 @@
-export {};
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  username: string;
+  createdAt?: string;
+}
 
-declare global{
-    interface User {
-        id: string;
-        email: string;
-        name: string;
-        userName: string;
-    }
+export interface LoginResponse {
+  message: string;
+  accessToken: string;
+  refreshToken: string;
+  user: User;
+}
 
-    interface LoginResponse {
-        message: string;
-        accessToken: string;
-        refreshToken: string;
-        user: User;
-    }
+export interface RegisterResponse {
+  id: string;
+  email: string;
+  name: string;
+  username: string;
+  createdAt: string;
+}
 
-    interface RegisterResponse {
-        id: string
-        email: string;
-        name: string;
-        username: string;
-    }
+export interface LoginInput {
+  username: string;
+  password: string;
+}
+
+export interface RegisterInput {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+
+export type NavItemId = "dashboard" | "solicitacoes";
+
+export interface NavItem {
+  id: NavItemId;
+  href: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
 }

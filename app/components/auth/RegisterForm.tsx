@@ -6,8 +6,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { User, Mail, KeyRound, Eye, EyeOff, ArrowRight } from "lucide-react";
 import { FormLayout, FormField } from "@/app/components/ui";
-import { registerSchema, type RegisterInput } from "@/app/lib/validations/auth";
-import { register, setAuthToken } from "@/app/lib/api";
+import { registerSchema } from "@/app/lib/validations/auth";
+import { RegisterInput } from "@/app/types";
+import { register, login, setAuthToken } from "@/app/lib/api";
 
 export function RegisterForm() {
   const router = useRouter();
@@ -38,8 +39,9 @@ export function RegisterForm() {
     try {
       const { confirmPassword: _confirmPassword, ...registerData } = data;
       void _confirmPassword;
-      const response = await register(registerData);
-      setAuthToken(response.token);
+      await register(registerData);
+      const loginResponse = await login(registerData.username, registerData.password);
+      setAuthToken(loginResponse.accessToken);
       router.push("/dashboard");
       router.refresh();
     } catch (err: unknown) {

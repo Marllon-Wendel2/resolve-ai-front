@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getAuthToken } from "@/app/lib/api";
+import { User } from "@/app/types";
 
 
 function parseJwt(token: string): Record<string, unknown> | null {
@@ -32,7 +33,7 @@ export function useUser(): User | null {
         // eslint-disable-next-line react-hooks/set-state-in-effect -- initial user load from token
         setUser({
           name,
-          userName: (payload.username as string) || "",
+          username: (payload.username as string) || "",
           email: (payload.email as string) || "",
           id: (payload.sub as string) || "",
         });

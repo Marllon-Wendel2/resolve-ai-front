@@ -4,19 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { Inbox, Layers, LayoutDashboard, LogOut } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 import { cn } from "@/app/lib/cn";
 import { clearAuthToken } from "@/app/lib/api";
 import { useUser } from "@/app/hooks/useUser";
-
-export type NavItemId = "dashboard" | "solicitacoes";
-
-interface NavItem {
-  id: NavItemId;
-  href: string;
-  label: string;
-  icon: LucideIcon;
-}
+import { NavItem, NavItemId } from "@/app/types";
 
 const NAV_ITEMS: readonly NavItem[] = [
   { id: "dashboard", href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
