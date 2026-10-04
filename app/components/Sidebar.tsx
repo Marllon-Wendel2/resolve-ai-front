@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { Inbox, Layers, LayoutDashboard, LogOut } from "lucide-react";
 import { cn } from "@/app/lib/cn";
-import { clearAuthToken } from "@/app/lib/api";
+import { clearAuthTokens } from "@/app/lib/api";
 import { useUser } from "@/app/hooks/useUser";
 import { NavItem, NavItemId } from "@/app/types";
 
@@ -29,7 +29,7 @@ export default function Sidebar() {
   const active = resolveActiveItem(pathname);
 
   const handleLogout = () => {
-    clearAuthToken();
+    clearAuthTokens();
     router.push("/login");
     router.refresh();
   };

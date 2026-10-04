@@ -4,11 +4,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import { User, Mail, KeyRound, Eye, EyeOff, ArrowRight } from "lucide-react";
 import { FormLayout, FormField } from "@/app/components/ui";
 import { registerSchema } from "@/app/lib/validations/auth";
 import { RegisterInput } from "@/app/types";
-import { register, login, setAuthToken } from "@/app/lib/api";
+import { register, login } from "@/app/lib/api";
 
 export function RegisterForm() {
   const router = useRouter();
@@ -40,13 +41,15 @@ export function RegisterForm() {
       const { confirmPassword: _confirmPassword, ...registerData } = data;
       void _confirmPassword;
       await register(registerData);
-      const loginResponse = await login(registerData.username, registerData.password);
-      setAuthToken(loginResponse.accessToken);
+      await login(registerData.username, registerData.password);
+      toast.success("Conta criada com sucesso!");
       router.push("/dashboard");
       router.refresh();
     } catch (err: unknown) {
       const axiosError = err as { response?: { data?: { message?: string } } };
-      setError(axiosError.response?.data?.message || "Erro ao criar conta. Tente novamente.");
+      const message = axiosError.response?.data?.message || "Erro ao criar conta. Tente novamente.";
+      setError(message);
+      toast.error(message);
     } finally {
       setIsSubmitting(false);
     }

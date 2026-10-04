@@ -124,3 +124,14 @@ export interface DataTableColumn<T> {
   align?: "left" | "center" | "right";
   render?: (item: T, index: number) => React.ReactNode;
 }
+
+export interface CreateSolicitacaoInput {
+  title: string;
+  description: string;
+  category: string;
+}
+
+export interface UpdateSolicitacaoInput extends CreateSolicitacaoInput {
+  id: string;
+  status: "Open" | "InProgress" | "Closed";
+}

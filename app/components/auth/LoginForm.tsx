@@ -4,11 +4,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import { User, KeyRound, Eye, EyeOff, ArrowRight } from "lucide-react";
 import { Checkbox, FormLayout, FormField } from "@/app/components/ui";
 import { loginSchema } from "@/app/lib/validations/auth";
 import { LoginInput } from "@/app/types";
-import { login, setAuthToken } from "@/app/lib/api";
+import { login } from "@/app/lib/api";
 
 export function LoginForm() {
   const router = useRouter();
@@ -34,13 +35,15 @@ export function LoginForm() {
     setIsSubmitting(true);
 
     try {
-      const response = await login(data.username, data.password);
-      setAuthToken(response.accessToken);
+      await login(data.username, data.password);
+      toast.success("Bem-vindo de volta!");
       router.push("/dashboard");
       router.refresh();
     } catch (err: unknown) {
       const axiosError = err as { response?: { data?: { message?: string } } };
-      setError(axiosError.response?.data?.message || "Erro ao iniciar sessão. Tente novamente.");
+      const message = axiosError.response?.data?.message || "Credenciais inválidas. Tente novamente.";
+      setError(message);
+      toast.error(message);
     } finally {
       setIsSubmitting(false);
     }
