@@ -15,3 +15,5 @@ export { Avatar } from "./Avatar";
 export { DataTable, type DataTableProps } from "./DataTable";
 export { Pagination } from "./Pagination";
 export { SolicitacoesFilters } from "./SolicitacoesFilters";
+export { Textarea, type TextareaProps } from "./Textarea";
+export { SolicitacaoModal } from "./SolicitacaoModal";

@@ -11,9 +11,7 @@ const categoryColors: Record<string, { dot: string; label: string }> = {
   Infra: { dot: "#60a5fa", label: "#e4e4e7" },
   TI: { dot: "#60a5fa", label: "#e4e4e7" },
   Materiais: { dot: "#fbbf24", label: "#e4e4e7" },
-  Acesso: { dot: "#d8b4fe", label: "#e4e4e7" },
   RH: { dot: "#d8b4fe", label: "#e4e4e7" },
-  Facilities: { dot: "#86efac", label: "#e4e4e7" },
   Financeiro: { dot: "#f9a8d4", label: "#e4e4e7" },
 };
 

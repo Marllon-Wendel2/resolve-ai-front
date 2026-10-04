@@ -1,5 +1,5 @@
 import { Solicitation, SolicitationDisplay, SolicitationStatus } from "@/app/types";
-import { Monitor, ShoppingCart, Users, Building2, Wallet, LucideIcon } from "lucide-react";
+import { Monitor, ShoppingCart, Users, Wallet, LucideIcon } from "lucide-react";
 
 export interface CategoryStyle {
   icon: LucideIcon;
@@ -16,9 +16,7 @@ const categoryStyles: Record<string, CategoryStyle> = {
   Infra: { icon: Monitor, bgColor: "#16233a", iconColor: "#93c5fd" },
   TI: { icon: Monitor, bgColor: "#16233a", iconColor: "#93c5fd" },
   Materiais: { icon: ShoppingCart, bgColor: "#2a1c0b", iconColor: "#fbbf24" },
-  Acesso: { icon: Users, bgColor: "#241631", iconColor: "#d8b4fe" },
   RH: { icon: Users, bgColor: "#241631", iconColor: "#d8b4fe" },
-  Facilities: { icon: Building2, bgColor: "#10241a", iconColor: "#86efac" },
   Financeiro: { icon: Wallet, bgColor: "#2b1624", iconColor: "#f9a8d4" },
 };
 

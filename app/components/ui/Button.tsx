@@ -37,7 +37,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variantStyles = {
       primary:
-        "bg-accent text-on-accent hover:!bg-accent/90 hover:!text-on-accent border-none focus:ring-accent",
+        "!bg-accent !text-on-accent hover:!bg-accent/90 hover:!text-on-accent border-none focus:ring-accent",
       ghost: 
         "bg-transparent text-zinc-100 hover:!bg-zinc-800 hover:!text-zinc-100 border-none focus:ring-zinc-700",
       outline:

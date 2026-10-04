@@ -80,3 +80,40 @@ body {
     animation: none;
   }
 }
+
+.solicitacao-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  max-width: 520px;
+  width: calc(100% - 32px);
+  max-height: calc(100dvh - 32px);
+  box-shadow: 0 24px 60px rgb(0 0 0 / 0.4);
+  animation: modal-in 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.solicitacao-modal::backdrop {
+  background-color: rgb(0 0 0 / 0.6);
+  backdrop-filter: blur(4px);
+  animation: backdrop-in 180ms ease-out;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    translate: -50% calc(-50% - 8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solicitacao-modal,
+  .solicitacao-modal::backdrop {
+    animation: none;
+  }
+}
