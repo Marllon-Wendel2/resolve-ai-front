@@ -8,6 +8,8 @@ import { StatusDonut } from "@/app/components/ui";
 import { useDashboard } from "@/app/hooks/useDashboard";
 import { useRecentActivity } from "@/app/hooks/useRecentActivity";
 import { LayoutDashboard, CircleDot, LoaderCircle, CircleCheck } from "lucide-react";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 export default function DashboardPage() {
   const { stats, loading: statsLoading, error: statsError } = useDashboard();
@@ -15,6 +17,15 @@ export default function DashboardPage() {
 
   const loading = statsLoading || activityLoading;
   const error = statsError || activityError;
+
+  useEffect(() => {
+    if (statsError) {
+      toast.error("Erro ao carregar estatísticas do dashboard");
+    }
+    if (activityError) {
+      toast.error("Erro ao carregar atividade recente");
+    }
+  }, [statsError, activityError]);
 
   if (loading) {
     return (

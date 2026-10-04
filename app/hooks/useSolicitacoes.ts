@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { getSolicitacoes } from "@/app/lib/api";
 import { transformSolicitations } from "@/app/lib/solicitationUtils";
 import { SolicitationDisplay, SolicitacoesParams } from "@/app/types";
+import { toast } from "react-toastify";
 
 interface UseSolicitacoesReturn {
   data: SolicitationDisplay[];
@@ -50,8 +51,13 @@ export function useSolicitacoes(): UseSolicitacoesReturn {
     orderBy: "desc",
   });
 
+  const isInitialLoad = useRef(true);
+
   const fetchData = useCallback(async () => {
-    setLoading(true);
+    const isRefresh = !isInitialLoad.current;
+    if (!isRefresh) {
+      setLoading(true);
+    }
     setError(null);
 
     try {
@@ -69,12 +75,20 @@ export function useSolicitacoes(): UseSolicitacoesReturn {
       const response = await getSolicitacoes(params);
       setData(transformSolicitations(response.data));
       setTotal(response.total);
+      if (isRefresh) {
+        toast.success("Lista atualizada");
+      }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Erro ao carregar solicitações");
+      const message = err instanceof Error ? err.message : "Erro ao carregar solicitações";
+      setError(message);
       setData([]);
       setTotal(0);
+      if (isRefresh) {
+        toast.error(message);
+      }
     } finally {
       setLoading(false);
+      isInitialLoad.current = false;
     }
   }, [page, pageSize, filters]);
 
