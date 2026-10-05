@@ -10,6 +10,7 @@ import { useRecentActivity } from "@/app/hooks/useRecentActivity";
 import { LayoutDashboard, CircleDot, LoaderCircle, CircleCheck } from "lucide-react";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import { deltaColor, formatSignedInt, formatSignedPct } from "@/app/lib/kpi";
 
 export default function DashboardPage() {
   const { stats, loading: statsLoading, error: statsError } = useDashboard();
@@ -131,44 +132,47 @@ export default function DashboardPage() {
   if (!stats) return null;
 
   const kpis = [
-    {
-      label: "TOTAL DE PEDIDOS",
-      value: stats.totalSolicitations,
-      icon: LayoutDashboard,
-      iconBgColor: "#3a2410",
-      iconColor: "#f0a04b",
-      delta: "+8%",
-      caption: "nos últimos 7 dias",
-    },
-    {
-      label: "ABERTAS",
-      value: stats.openSolicitations,
-      icon: CircleDot,
-      iconBgColor: "#16233a",
-      iconColor: "#93c5fd",
-      delta: "-12%",
-      deltaColor: "#f87171",
-      caption: "aguardam atribuição",
-    },
-    {
-      label: "EM ATENDIMENTO",
-      value: stats.inProgressSolicitations,
-      icon: LoaderCircle,
-      iconBgColor: "#2a1c0b",
-      iconColor: "#fbbf24",
-      delta: "+3",
-      caption: "em curso agora",
-    },
-    {
-      label: "CONCLUÍDAS",
-      value: stats.closedSolicitations,
-      icon: CircleCheck,
-      iconBgColor: "#10241a",
-      iconColor: "#4ade80",
-      delta: "+12%",
-      caption: "taxa de resolução 57%",
-    },
-  ];
+  {
+    label: "TOTAL DE PEDIDOS",
+    value: stats.totalSolicitations,
+    icon: LayoutDashboard,
+    iconBgColor: "#3a2410",
+    iconColor: "#f0a04b",
+    delta: formatSignedPct(stats.totalDeltaPct),
+    deltaColor: deltaColor(stats.totalDeltaPct),
+    caption: "nos últimos 7 dias",
+  },
+  {
+    label: "ABERTAS",
+    value: stats.openSolicitations,
+    icon: CircleDot,
+    iconBgColor: "#16233a",
+    iconColor: "#93c5fd",
+    delta: formatSignedPct(stats.openDeltaPct),
+    deltaColor: deltaColor(stats.openDeltaPct),
+    caption: "aguardam atribuição",
+  },
+  {
+    label: "EM ATENDIMENTO",
+    value: stats.inProgressSolicitations,
+    icon: LoaderCircle,
+    iconBgColor: "#2a1c0b",
+    iconColor: "#fbbf24",
+    delta: formatSignedInt(stats.inProgressDelta),   // absoluto: "+1"
+    deltaColor: deltaColor(stats.inProgressDelta),
+    caption: "em curso agora",
+  },
+  {
+    label: "CONCLUÍDAS",
+    value: stats.closedSolicitations,
+    icon: CircleCheck,
+    iconBgColor: "#10241a",
+    iconColor: "#4ade80",
+    delta: formatSignedPct(stats.closedDeltaPct),
+    deltaColor: deltaColor(stats.closedDeltaPct),
+    caption: `taxa de resolução ${stats.resolutionRate}%`,
+  },
+];
 
   return (
     <div className="flex flex-col gap-6">

@@ -44,16 +44,19 @@ export interface NavItem {
   icon: React.ComponentType<{ className?: string }>;
 }
 
-// Dashboard KPI types
 export interface DashboardStats {
   totalSolicitations: number;
   openSolicitations: number;
   inProgressSolicitations: number;
   closedSolicitations: number;
   categories: Record<string, number>;
+  totalDeltaPct: number | null;
+  openDeltaPct: number | null;
+  inProgressDelta: number;
+  closedDeltaPct: number | null;
+  resolutionRate: number;
 }
 
-// Solicitation types
 export interface User {
   id: string;
   name: string;
