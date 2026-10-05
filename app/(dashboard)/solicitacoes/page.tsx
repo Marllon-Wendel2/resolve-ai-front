@@ -94,7 +94,7 @@ export default function SolicitacoesPage() {
     {
       key: "status",
       title: "ESTADO",
-      width: 150,
+      width: 165,
       align: "center",
       render: (item) => (
         <StatusBadge
@@ -333,7 +333,7 @@ function DetailsModal({
       onClose={onClose}
       onClick={(e) => e.target === dialogRef.current && onClose()}
     >
-      <div className="bg-zinc-950 rounded-[18px] border border-zinc-800 w-full max-w-[520px] shadow-[0_24px_60px_rgba(0,0,0,0.4)]">
+      <div className="bg-zinc-950 rounded-[18px] border border-zinc-800 w-full max-w-130 shadow-[0_24px_60px_rgba(0,0,0,0.4)]">
         <div className="flex h-14 shrink-0 items-center justify-between px-4 border-b border-zinc-800">
           <h2 className="text-[15px] font-bold text-white">Detalhes da solicitação</h2>
           <button
