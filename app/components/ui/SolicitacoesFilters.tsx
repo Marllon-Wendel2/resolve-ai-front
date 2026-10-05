@@ -24,6 +24,8 @@ interface SolicitacoesFiltersProps {
     orderBy: "asc" | "desc";
   }>) => void;
   onSearch: (search: string) => void;
+  pageSize: number;
+  onPageSizeChange: (pageSize: number) => void;
   categories?: string[];
   className?: string;
 }
@@ -35,10 +37,14 @@ const STATUS_OPTIONS = [
   { value: "Closed", label: "Concluído" },
 ];
 
+const PAGE_SIZE_OPTIONS = [10, 20, 50, 100];
+
 export function SolicitacoesFilters({
   filters,
   onFiltersChange,
   onSearch,
+  pageSize,
+  onPageSizeChange,
   categories = [],
   className,
 }: SolicitacoesFiltersProps) {
@@ -129,6 +135,26 @@ export function SolicitacoesFilters({
           >
             {STATUS_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
+          <ChevronDown
+            className="absolute right-2.75 top-1/2 -translate-y-1/2 h-4 w-4 text-muted pointer-events-none"
+            aria-hidden="true"
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-1.5 min-w-42.5">
+        <label className="text-[10px] font-bold tracking-widest text-muted">EXIBIR</label>
+        <div className="relative w-37.5">
+          <select
+            value={pageSize}
+            onChange={(e) => onPageSizeChange(Number(e.target.value))}
+            aria-label="Exibir solicitações por vez"
+            className="w-full h-9 bg-zinc-900 border border-zinc-700 rounded-lg px-2.75 py-0 text-[12.5px] text-primary appearance-none pr-8 cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
+          >
+            {PAGE_SIZE_OPTIONS.map((size) => (
+              <option key={size} value={size}>{size}</option>
             ))}
           </select>
           <ChevronDown

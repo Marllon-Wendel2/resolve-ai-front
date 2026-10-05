@@ -20,12 +20,14 @@ export default function SolicitacoesPage() {
     data,
     total,
     loading,
-    page,
+    loadingMore,
+    hasMore,
     pageSize,
     filters,
-    setPage,
+    setPageSize,
     setFilters,
     setSearch,
+    loadMore,
     refresh,
   } = useSolicitacoes();
 
@@ -264,6 +266,8 @@ export default function SolicitacoesPage() {
           filters={filters}
           onFiltersChange={setFilters}
           onSearch={setSearch}
+          pageSize={pageSize}
+          onPageSizeChange={setPageSize}
           categories={["TI", "TH", "Sales", "Finance", "Infra"]}
         />
       )}
@@ -273,11 +277,12 @@ export default function SolicitacoesPage() {
         columns={columns}
         loading={loading}
         emptyMessage="Nenhuma solicitação encontrada"
-        pagination={{
-          page,
-          pageSize,
+        loadMore={{
+          shown: data.length,
           total,
-          onPageChange: setPage,
+          hasMore,
+          loading: loadingMore,
+          onLoadMore: loadMore,
         }}
       />
 

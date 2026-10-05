@@ -2,7 +2,7 @@
 
 import { cn } from "@/app/lib/cn";
 import { DataTableColumn } from "@/app/types";
-import { Pagination } from "./Pagination";
+import { Button } from "./Button";
 
 export interface DataTableProps<T> {
   data: T[];
@@ -10,11 +10,12 @@ export interface DataTableProps<T> {
   loading?: boolean;
   emptyMessage?: string;
   className?: string;
-  pagination?: {
-    page: number;
-    pageSize: number;
+  loadMore?: {
+    shown: number;
     total: number;
-    onPageChange: (page: number) => void;
+    hasMore: boolean;
+    loading: boolean;
+    onLoadMore: () => void;
   };
   onRowClick?: (item: T) => void;
 }
@@ -96,7 +97,7 @@ export function DataTable<T>({
   loading = false,
   emptyMessage = "Nenhum registo encontrado",
   className,
-  pagination,
+  loadMore,
   onRowClick,
 }: DataTableProps<T>) {
   if (loading) {
@@ -128,7 +129,7 @@ export function DataTable<T>({
             </tbody>
           </table>
         </div>
-        {pagination && (
+        {loadMore && (
           <div className="h-14 bg-zinc-900/50 border-t border-zinc-800 animate-pulse" />
         )}
       </div>
@@ -181,16 +182,29 @@ export function DataTable<T>({
           {body}
         </table>
       </div>
-      {pagination && (
-        <div className="h-14 bg-zinc-950/80 border-t border-zinc-800 flex items-center justify-between px-4">
+      {loadMore && (
+        <div className="min-h-14 bg-zinc-950/80 border-t border-zinc-800 flex items-center justify-between gap-4 px-4 py-2.5">
           <span className="text-[12.5px] text-secondary">
-            A mostrar {(pagination.page - 1) * pagination.pageSize + 1}–{Math.min(pagination.page * pagination.pageSize, pagination.total)} de {pagination.total} solicitações
+            {loadMore.total > 0 ? (
+              <>
+                A mostrar {loadMore.shown > 0 ? `1–${Math.min(loadMore.shown, loadMore.total)}` : 0} de{" "}
+                {loadMore.total} solicitações
+              </>
+            ) : (
+              <>A mostrar {loadMore.shown} solicitações</>
+            )}
           </span>
-          <Pagination
-            currentPage={pagination.page}
-            totalPages={Math.ceil(pagination.total / pagination.pageSize)}
-            onPageChange={pagination.onPageChange}
-          />
+          {loadMore.hasMore && (
+            <Button
+              variant="outline"
+              size="sm"
+              loading={loadMore.loading}
+              onClick={loadMore.onLoadMore}
+              className="shrink-0"
+            >
+              Buscar mais solicitações
+            </Button>
+          )}
         </div>
       )}
     </div>
