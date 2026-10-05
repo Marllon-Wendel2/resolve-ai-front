@@ -110,8 +110,8 @@ api.interceptors.response.use(
   }
 );
 
-export async function login(username: string, password: string): Promise<LoginResponse> {
-  const response = await api.post<LoginResponse>("/auth/login", { userName: username, password });
+export async function login(userName: string, password: string): Promise<LoginResponse> {
+  const response = await api.post<LoginResponse>("/auth/login", { userName: userName, password });
   const { accessToken, refreshToken } = response.data;
   setAuthTokens(accessToken, refreshToken);
   return response.data;
@@ -119,11 +119,11 @@ export async function login(username: string, password: string): Promise<LoginRe
 
 export async function register(data: {
   name: string;
-  username: string;
+  userName: string;
   email: string;
   password: string;
 }): Promise<RegisterResponse> {
-  const response = await api.post<RegisterResponse>("/auth/register", data);
+  const response = await api.post<RegisterResponse>("/users", data);
   return response.data;
 }
 
@@ -132,7 +132,7 @@ export async function refreshAuthTokens(): Promise<{ accessToken: string; refres
   if (!refreshToken) throw new Error("No refresh token");
 
   const response = await axios.post<{ accessToken: string; refreshToken: string }>(
-    `${API_BASE_URL}/auth/refresh`,
+    `${API_BASE_URL}auth/refresh`,
     { refreshToken }
   );
 

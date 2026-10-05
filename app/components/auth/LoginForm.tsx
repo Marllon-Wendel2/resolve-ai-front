@@ -25,7 +25,7 @@ export function LoginForm() {
   } = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      username: "",
+      userName: "",
       password: "",
     },
   });
@@ -35,7 +35,7 @@ export function LoginForm() {
     setIsSubmitting(true);
 
     try {
-      await login(data.username, data.password);
+      await login(data.userName, data.password);
       toast.success("Bem-vindo de volta!");
       router.push("/dashboard");
       router.refresh();
@@ -71,9 +71,9 @@ export function LoginForm() {
       <FormField
         label="User name ou email"
         placeholder="marta.cardoso"
-        error={errors.username?.message}
+        error={errors.userName?.message}
         required
-        {...register("username")}
+        {...register("userName")}
         leftIcon={<User className="h-4 w-4" />}
       />
 

@@ -2,7 +2,7 @@ export interface User {
   id: string;
   email: string;
   name: string;
-  username: string;
+  userName: string;
   createdAt?: string;
 }
 
@@ -17,18 +17,18 @@ export interface RegisterResponse {
   id: string;
   email: string;
   name: string;
-  username: string;
+  userName: string;
   createdAt: string;
 }
 
 export interface LoginInput {
-  username: string;
+  userName: string;
   password: string;
 }
 
 export interface RegisterInput {
   name: string;
-  username: string;
+  userName: string;
   email: string;
   password: string;
   confirmPassword: string;

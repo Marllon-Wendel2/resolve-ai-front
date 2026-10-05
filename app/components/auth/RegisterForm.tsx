@@ -26,7 +26,7 @@ export function RegisterForm() {
     resolver: zodResolver(registerSchema),
     defaultValues: {
       name: "",
-      username: "",
+      userName: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -41,7 +41,7 @@ export function RegisterForm() {
       const { confirmPassword: _confirmPassword, ...registerData } = data;
       void _confirmPassword;
       await register(registerData);
-      await login(registerData.username, registerData.password);
+      await login(registerData.userName, registerData.password);
       toast.success("Conta criada com sucesso!");
       router.push("/dashboard");
       router.refresh();
@@ -85,9 +85,9 @@ export function RegisterForm() {
       <FormField
         label="Utilizador"
         placeholder="marta.cardoso"
-        error={errors.username?.message}
+        error={errors.userName?.message}
         required
-        {...registerField("username")}
+        {...registerField("userName")}
         leftIcon={<User className="h-4 w-4" />}
         helperText="Apenas letras, números, ponto, underscore e hífen"
       />

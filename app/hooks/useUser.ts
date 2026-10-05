@@ -29,11 +29,11 @@ export function useUser(): User | null {
     if (token) {
       const payload = parseJwt(token);
       if (payload) {
-        const name = (payload.name as string) || (payload.username as string) || "Utilizador";
+        const name = (payload.name as string) || (payload.userName as string) || "Utilizador";
         // eslint-disable-next-line react-hooks/set-state-in-effect -- initial user load from token
         setUser({
           name,
-          username: (payload.username as string) || "",
+          userName: (payload.userName as string) || "",
           email: (payload.email as string) || "",
           id: (payload.sub as string) || "",
         });

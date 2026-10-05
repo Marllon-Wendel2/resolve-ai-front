@@ -2,7 +2,7 @@ import { z } from "zod";
 import { LoginInput, RegisterInput } from "@/app/types";
 
 export const loginSchema = z.object({
-  username: z
+  userName: z
     .string()
     .min(1, "Utilizador é obrigatório")
     .max(50, "Utilizador deve ter no máximo 50 caracteres"),
@@ -19,7 +19,7 @@ export const registerSchema = z
       .min(1, "Nome completo é obrigatório")
       .min(2, "Nome deve ter no mínimo 2 caracteres")
       .max(100, "Nome deve ter no máximo 100 caracteres"),
-    username: z
+    userName: z
       .string()
       .min(1, "Utilizador é obrigatório")
       .min(3, "Utilizador deve ter no mínimo 3 caracteres")
