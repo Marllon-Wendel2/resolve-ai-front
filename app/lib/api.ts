@@ -132,7 +132,7 @@ export async function refreshAuthTokens(): Promise<{ accessToken: string; refres
   if (!refreshToken) throw new Error("No refresh token");
 
   const response = await axios.post<{ accessToken: string; refreshToken: string }>(
-    `${API_BASE_URL}auth/refresh`,
+    `${API_BASE_URL}/auth/refresh`,
     { refreshToken }
   );
 
@@ -142,8 +142,14 @@ export async function refreshAuthTokens(): Promise<{ accessToken: string; refres
 }
 
 export async function logout(): Promise<void> {
-  await api.post("/auth/logout");
-  clearAuthTokens();
+  const refreshToken = getRefreshToken();
+  try {
+    if (refreshToken) {
+      await api.post("/auth/logout", { refreshToken });
+    }
+  } finally {
+    clearAuthTokens();
+  }
 }
 
 export async function getMe(userId: string): Promise<User> {
